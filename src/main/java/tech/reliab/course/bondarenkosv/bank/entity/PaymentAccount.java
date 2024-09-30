@@ -48,8 +48,8 @@ public class PaymentAccount extends BaseEntity {
     public PaymentAccount copy() {
         return new PaymentAccount(
                 id,
-                user,
-                bank,
+                user.copy(),
+                bank.copy(),
                 amount
         );
     }

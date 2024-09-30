@@ -107,7 +107,7 @@ public class Employee extends BaseEntity {
                 position,
                 bank,
                 isRemote,
-                bankOffice,
+                bankOffice.copy(),
                 canApplyCredits,
                 salary
         );

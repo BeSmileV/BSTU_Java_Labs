@@ -3,6 +3,7 @@ package main.java.tech.reliab.course.bondarenkosv.bank.utils;
 import main.java.tech.reliab.course.bondarenkosv.bank.consts.BankConsts;
 import main.java.tech.reliab.course.bondarenkosv.bank.entity.Bank;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -31,6 +32,16 @@ public class BankUtils {
         }
 
         return res + "]";
+    }
+
+    static public List<Bank> copyBankList(List<Bank> banks) {
+        List<Bank> res = new ArrayList<Bank>();
+
+        for (Bank bank : banks) {
+            res.add(bank.copy());
+        }
+
+        return res;
     }
 }
 

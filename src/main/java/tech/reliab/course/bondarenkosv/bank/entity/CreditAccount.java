@@ -9,7 +9,7 @@ public class CreditAccount extends BaseEntity {
     private float creditSum;
     private float monthlyPayment;
     private float percentageRate;
-    private int employeeId;
+    private Employee employee;
     private PaymentAccount paymentAccount;
 
     public CreditAccount(
@@ -22,7 +22,8 @@ public class CreditAccount extends BaseEntity {
             float creditSum,
             float monthlyPayment,
             float percentageRate,
-            int employeeId
+            Employee employeeId,
+            PaymentAccount paymentAccountId
     ) {
         this.id = id;
         this.user = user;
@@ -33,7 +34,8 @@ public class CreditAccount extends BaseEntity {
         this.creditSum = creditSum;
         this.monthlyPayment = monthlyPayment;
         this.percentageRate = percentageRate;
-        this.employeeId = employeeId;
+        this.employee = employeeId;
+        this.paymentAccount = paymentAccountId;
     }
 
     // Getters
@@ -69,8 +71,8 @@ public class CreditAccount extends BaseEntity {
         return percentageRate;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public Employee getEmployee() {
+        return employee;
     }
 
     public PaymentAccount getPaymentAccount() {
@@ -110,8 +112,8 @@ public class CreditAccount extends BaseEntity {
         this.percentageRate = percentageRate;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public void setPaymentAccount(PaymentAccount paymentAccount) {
@@ -131,7 +133,8 @@ public class CreditAccount extends BaseEntity {
                 creditSum,
                 monthlyPayment,
                 percentageRate,
-                employeeId
+                employee.copy(),
+                paymentAccount.copy()
         );
     }
 
@@ -147,7 +150,7 @@ public class CreditAccount extends BaseEntity {
                 ", creditSum=" + creditSum +
                 ", monthlyPayment=" + monthlyPayment +
                 ", percentageRate=" + percentageRate +
-                ", employeeId=" + employeeId +
+                ", employeeId=" + employee +
                 ", paymentAccount=" + paymentAccount.toString() +
                 ")";
     }

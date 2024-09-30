@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static main.java.tech.reliab.course.bondarenkosv.bank.utils.BankUtils.bankArrayToString;
+import static main.java.tech.reliab.course.bondarenkosv.bank.utils.BankUtils.copyBankList;
 import static main.java.tech.reliab.course.bondarenkosv.bank.utils.UserUtils.generateUserCreditRating;
 
 public class User extends BaseEntity {
@@ -95,7 +96,7 @@ public class User extends BaseEntity {
                 fio,
                 dateOfBirth,
                 workAddress,
-                banks,
+                copyBankList(banks),
                 monthlyIncome
         );
     }
