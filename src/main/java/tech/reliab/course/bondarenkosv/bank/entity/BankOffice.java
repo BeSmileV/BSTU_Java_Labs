@@ -1,9 +1,10 @@
 package main.java.tech.reliab.course.bondarenkosv.bank.entity;
 
-public class BankOffice extends BaseEntity {
+public class BankOffice extends BaseEntity<BankOffice> {
     private String name;
     private String address;
     private String status;
+    private int bank;
     private boolean canHasBankAtm;
     private int numOfBankAtm;
     private boolean canAppleCredit;
@@ -11,24 +12,26 @@ public class BankOffice extends BaseEntity {
     private boolean canTakeMoney;
     private float totalMoney;
     private float bankOfficeRentCost;
+    private float reservedMoney;
 
     public BankOffice(
-            int id,
             String name,
             String address,
             String status,
+            int bank,
             boolean canHasBankAtm,
             int numOfBankAtm,
             boolean canAppleCredit,
             boolean canGetMoney,
             boolean canTakeMoney,
             float totalMoney,
-            float bankOfficeRentCost
+            float bankOfficeRentCost,
+            float reservedMoney
     ) {
-        this.id = id;
         this.name = name;
         this.address = address;
         this.status = status;
+        this.bank = bank;
         this.canHasBankAtm = canHasBankAtm;
         this.numOfBankAtm = numOfBankAtm;
         this.canAppleCredit = canAppleCredit;
@@ -36,6 +39,7 @@ public class BankOffice extends BaseEntity {
         this.canTakeMoney = canTakeMoney;
         this.totalMoney = totalMoney;
         this.bankOfficeRentCost = bankOfficeRentCost;
+        this.reservedMoney = reservedMoney;
     }
 
     // Getters
@@ -51,6 +55,10 @@ public class BankOffice extends BaseEntity {
         return status;
     }
 
+    public int getBank() {
+        return bank;
+    }
+
     public boolean getIsCanHasBankAtm() {
         return canHasBankAtm;
     }
@@ -59,20 +67,24 @@ public class BankOffice extends BaseEntity {
         return numOfBankAtm;
     }
 
-    public boolean getIsCanAppleCredit() {
+    public boolean getCanAppleCredit() {
         return canAppleCredit;
     }
 
-    public boolean getIsCanGetMoney() {
+    public boolean getCanGetMoney() {
         return canGetMoney;
     }
 
-    public boolean getIsCanTakeMoney() {
+    public boolean getCanTakeMoney() {
         return canTakeMoney;
     }
 
     public float getTotalMoney() {
         return totalMoney;
+    }
+
+    public float getReservedMoney() {
+        return reservedMoney;
     }
 
     public float getBankOfficeRentCost() {
@@ -90,6 +102,10 @@ public class BankOffice extends BaseEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public void setBank(int bank) {
+        this.bank = bank;
     }
 
     public void setCanHasBankAtm(boolean canHasBankAtm) {
@@ -117,6 +133,10 @@ public class BankOffice extends BaseEntity {
         this.totalMoney = totalMoney;
     }
 
+    public void setReservedMoney(float reservedMoney) {
+        this.reservedMoney = reservedMoney;
+    }
+
 
     public void setBankOfficeRentCost(float bankOfficeRentCost) {
         this.bankOfficeRentCost = bankOfficeRentCost;
@@ -125,19 +145,22 @@ public class BankOffice extends BaseEntity {
 
     @Override
     public BankOffice copy() {
-        return new BankOffice(
-                id,
+        BankOffice copy = new BankOffice(
                 name,
                 address,
                 status,
+                bank,
                 canHasBankAtm,
                 numOfBankAtm,
                 canAppleCredit,
                 canGetMoney,
                 canTakeMoney,
                 totalMoney,
-                bankOfficeRentCost
+                bankOfficeRentCost,
+                reservedMoney
         );
+        copy.setId(id);
+        return copy;
     }
 
     @Override
@@ -147,6 +170,7 @@ public class BankOffice extends BaseEntity {
                 ", name=" + name +
                 ", address=" + address +
                 ", status=" + status +
+                ", bank_id=" + bank +
                 ", canHasBankAtm=" + canHasBankAtm +
                 ", numOfBankAtm=" + numOfBankAtm +
                 ", canAppleCredit=" + canAppleCredit +
@@ -154,6 +178,7 @@ public class BankOffice extends BaseEntity {
                 ", canTakeMoney=" + canTakeMoney +
                 ", totalMoney=" + totalMoney +
                 ", bankOfficeRentCost=" + bankOfficeRentCost +
+                ", reservedMoney=" + reservedMoney +
                 ")";
     }
 }

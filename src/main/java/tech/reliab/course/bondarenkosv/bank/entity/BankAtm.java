@@ -1,31 +1,31 @@
 package main.java.tech.reliab.course.bondarenkosv.bank.entity;
 
-public class BankAtm extends BaseEntity {
+public class BankAtm extends BaseEntity<BankAtm> {
     private String name;
     private String address;
     private String status;
-    private Bank bank;
-    private BankOffice bankOffice;
-    private Employee employee;
+    private int bank;
+    private int bankOffice;
+    private int employee;
     private boolean canGetMoney;
     private boolean canTakeMoney;
     private float totalMoney;
+    private float reservedMoney;
     private float serviceCost;
 
     public BankAtm(
-            int id,
             String name,
             String address,
             String status,
-            Bank bank,
-            BankOffice bankOffice,
-            Employee employee,
+            int bank,
+            int bankOffice,
+            int employee,
             boolean canGetMoney,
             boolean canTakeMoney,
             float totalMoney,
-            float serviceCost
+            float serviceCost,
+            float reservedMoney
     ) {
-        this.id = id;
         this.name = name;
         this.address = address;
         this.status = status;
@@ -36,6 +36,7 @@ public class BankAtm extends BaseEntity {
         this.canTakeMoney = canTakeMoney;
         this.totalMoney = totalMoney;
         this.serviceCost = serviceCost;
+        this.reservedMoney = reservedMoney;
     }
 
     // Getters
@@ -51,15 +52,15 @@ public class BankAtm extends BaseEntity {
         return status;
     }
 
-    public Bank getBank() {
+    public int getBank() {
         return bank;
     }
 
-    public BankOffice getBankOffice() {
+    public int getBankOffice() {
         return bankOffice;
     }
 
-    public Employee getEmployee() {
+    public int getEmployee() {
         return employee;
     }
 
@@ -73,6 +74,10 @@ public class BankAtm extends BaseEntity {
 
     public float getTotalMoney() {
         return totalMoney;
+    }
+
+    public float getReservedMoney() {
+        return reservedMoney;
     }
 
     public float getServiceCost() {
@@ -92,15 +97,15 @@ public class BankAtm extends BaseEntity {
         this.status = status;
     }
 
-    public void setBank(Bank bank) {
+    public void setBank(int bank) {
         this.bank = bank;
     }
 
-    public void setBankOffice(BankOffice bankOffice) {
+    public void setBankOffice(int bankOffice) {
         this.bankOffice = bankOffice;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(int employee) {
         this.employee = employee;
     }
 
@@ -116,6 +121,10 @@ public class BankAtm extends BaseEntity {
         this.totalMoney = totalMoney;
     }
 
+    public void setReservedMoney(float reservedMoney) {
+        this.reservedMoney = reservedMoney;
+    }
+
     public void setServiceCost(float serviceCost) {
         this.serviceCost = serviceCost;
     }
@@ -123,19 +132,21 @@ public class BankAtm extends BaseEntity {
 
     @Override
     public BankAtm copy() {
-        return new BankAtm(
-                id,
+        BankAtm copy = new BankAtm(
                 name,
                 address,
                 status,
-                bank.copy(),
-                bankOffice.copy(),
-                employee.copy(),
+                bank,
+                bankOffice,
+                employee,
                 canGetMoney,
                 canTakeMoney,
                 totalMoney,
-                serviceCost
+                serviceCost,
+                reservedMoney
         );
+        copy.setId(id);
+        return copy;
     }
 
     public String toString() {
@@ -144,13 +155,14 @@ public class BankAtm extends BaseEntity {
                 ", name=" + name +
                 ", address=" + address +
                 ", status=" + status +
-                ", bank=" + bank.toString() +
-                ", bankOffice=" + bankOffice.toString() +
-                ", employee=" + employee.toString() +
+                ", bank_id=" + bank +
+                ", bankOffice_id=" + bankOffice +
+                ", employee_id=" + employee +
                 ", canGetMoney=" + canGetMoney +
                 ", canTakeMoney=" + canTakeMoney +
                 ", totalMoney=" + totalMoney +
                 ", serviceCost=" + serviceCost +
+                ", reservedMoney=" + reservedMoney +
                 ")";
     }
 }

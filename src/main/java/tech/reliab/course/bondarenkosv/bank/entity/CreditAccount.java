@@ -1,6 +1,6 @@
 package main.java.tech.reliab.course.bondarenkosv.bank.entity;
 
-public class CreditAccount extends BaseEntity {
+public class CreditAccount extends BaseEntity<CreditAccount> {
     private User user;
     private Bank bank;
     private String creditStart;
@@ -13,7 +13,6 @@ public class CreditAccount extends BaseEntity {
     private PaymentAccount paymentAccount;
 
     public CreditAccount(
-            int id,
             User user,
             Bank bank,
             String creditStart,
@@ -25,7 +24,6 @@ public class CreditAccount extends BaseEntity {
             Employee employeeId,
             PaymentAccount paymentAccountId
     ) {
-        this.id = id;
         this.user = user;
         this.bank = bank;
         this.creditStart = creditStart;
@@ -123,8 +121,7 @@ public class CreditAccount extends BaseEntity {
 
     @Override
     public CreditAccount copy() {
-        return new CreditAccount(
-                id,
+        CreditAccount copy = new CreditAccount(
                 user,
                 bank,
                 creditStart,
@@ -136,6 +133,8 @@ public class CreditAccount extends BaseEntity {
                 employee.copy(),
                 paymentAccount.copy()
         );
+        copy.setId(id);
+        return copy;
     }
 
     @Override

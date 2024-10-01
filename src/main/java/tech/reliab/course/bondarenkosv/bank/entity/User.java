@@ -1,29 +1,24 @@
 package main.java.tech.reliab.course.bondarenkosv.bank.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
-import static main.java.tech.reliab.course.bondarenkosv.bank.utils.BankUtils.bankArrayToString;
-import static main.java.tech.reliab.course.bondarenkosv.bank.utils.BankUtils.copyBankList;
 import static main.java.tech.reliab.course.bondarenkosv.bank.utils.UserUtils.generateUserCreditRating;
 
-public class User extends BaseEntity {
+public class User extends BaseEntity<User> {
     private String fio;
     private String dateOfBirth;
     private String workAddress;
     private float monthlyIncome;
-    private List<Bank> banks;
+    private int[] banks;
     private float creditRating;
 
     public User(
-            int id,
             String fio,
             String dateOfBirth,
             String workAddress,
-            List<Bank> banks,
+            int[] banks,
             float monthlyIncome
     ) {
-        this.id = id;
         this.fio = fio;
         this.dateOfBirth = dateOfBirth;
         this.workAddress = workAddress;
@@ -49,14 +44,8 @@ public class User extends BaseEntity {
         return monthlyIncome;
     }
 
-    public List<Bank> getBanks() {
-        List<Bank> copy = new ArrayList<>();
-
-        for (Bank bank : banks) {
-            copy.add(bank.copy());
-        }
-
-        return copy;
+    public int[] getBanks() {
+        return banks.clone();
     }
 
     public float getCreditRating() {
@@ -80,8 +69,8 @@ public class User extends BaseEntity {
         this.monthlyIncome = monthlyIncome;
     }
 
-    public void setBanks(List<Bank> banks) {
-        this.banks = banks;
+    public void setBanks(int[] banks) {
+        this.banks = banks.clone();
     }
 
     public void setCreditRating(float creditRating) {
@@ -91,14 +80,15 @@ public class User extends BaseEntity {
 
     @Override
     public User copy() {
-        return new User(
-                id,
+        User copy = new User(
                 fio,
                 dateOfBirth,
                 workAddress,
-                copyBankList(banks),
+                banks.clone(),
                 monthlyIncome
         );
+        copy.setId(id);
+        return copy;
     }
 
     @Override
@@ -109,7 +99,7 @@ public class User extends BaseEntity {
                 ", dateOfBirth=" + dateOfBirth +
                 ", workAddress=" + workAddress +
                 ", monthlyIncome=" + monthlyIncome +
-                ", banks=" + bankArrayToString(banks) +
+                ", banks=" + Arrays.toString(banks) +
                 ")";
     }
 }

@@ -1,6 +1,6 @@
 package main.java.tech.reliab.course.bondarenkosv.bank.entity;
 
-public abstract class BaseEntity {
+public abstract class BaseEntity<T> {
     protected int id;
 
     public int getId() {
@@ -11,5 +11,5 @@ public abstract class BaseEntity {
         this.id = id;
     }
 
-    public abstract BaseEntity copy();
+    public abstract T copy();
 }

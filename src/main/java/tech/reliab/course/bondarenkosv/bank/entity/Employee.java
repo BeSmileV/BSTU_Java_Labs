@@ -1,27 +1,25 @@
 package main.java.tech.reliab.course.bondarenkosv.bank.entity;
 
-public class Employee extends BaseEntity {
+public class Employee extends BaseEntity<Employee> {
     private String fio;
     private String dateOfBirth;
     private String position;
-    private Bank bank;
+    private int bank;
     private boolean isRemote;
-    private BankOffice bankOffice;
+    private int bankOffice;
     private boolean canApplyCredits;
     private float salary;
 
     public Employee(
-            int id,
             String fio,
             String dateOfBirth,
             String position,
-            Bank bank,
+            int bank,
             boolean isRemote,
-            BankOffice bankOffice,
+            int bankOffice,
             boolean canApplyCredits,
             float salary
     ) {
-        this.id = id;
         this.fio = fio;
         this.dateOfBirth = dateOfBirth;
         this.position = position;
@@ -45,7 +43,7 @@ public class Employee extends BaseEntity {
         return position;
     }
 
-    public Bank getBank() {
+    public int getBank() {
         return bank;
     }
 
@@ -53,7 +51,7 @@ public class Employee extends BaseEntity {
         return isRemote;
     }
 
-    public BankOffice getBankOffice() {
+    public int getBankOffice() {
         return bankOffice;
     }
 
@@ -78,7 +76,7 @@ public class Employee extends BaseEntity {
         this.position = position;
     }
 
-    public void setBank(Bank bank) {
+    public void setBank(int bank) {
         this.bank = bank;
     }
 
@@ -86,7 +84,7 @@ public class Employee extends BaseEntity {
         this.isRemote = isRemote;
     }
 
-    public void setBankOffice(BankOffice bankOffice) {
+    public void setBankOffice(int bankOffice) {
         this.bankOffice = bankOffice;
     }
 
@@ -100,17 +98,18 @@ public class Employee extends BaseEntity {
 
     @Override
     public Employee copy() {
-        return new Employee(
-                id,
+        Employee copy = new Employee(
                 fio,
                 dateOfBirth,
                 position,
                 bank,
                 isRemote,
-                bankOffice.copy(),
+                bankOffice,
                 canApplyCredits,
                 salary
         );
+        copy.setId(id);
+        return copy;
     }
 
     @Override
@@ -120,9 +119,9 @@ public class Employee extends BaseEntity {
                 ", fio=" + fio +
                 ", dateOfBirth=" + dateOfBirth +
                 ", position=" + position +
-                ", bank=" + bank.toString() +
+                ", bank_id=" + bank +
                 ", isRemote=" + isRemote +
-                ", bankOffice=" + bankOffice.toString() +
+                ", bankOffice_id=" + bankOffice +
                 ", canApplyCredits=" + canApplyCredits +
                 ", salary=" + salary +
                 ")";

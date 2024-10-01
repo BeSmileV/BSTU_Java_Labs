@@ -1,0 +1,76 @@
+package main.java.tech.reliab.course.bondarenkosv.bank.service.impl;
+
+import main.java.tech.reliab.course.bondarenkosv.bank.entity.BankOffice;
+import main.java.tech.reliab.course.bondarenkosv.bank.service.BankOfficeServiceInterface;
+
+import java.util.ArrayList;
+
+public class BankOfficeService extends BaseService<BankOffice> implements BankOfficeServiceInterface {
+    private BankService bankService;
+
+    public BankOfficeService() {
+        entityList = new ArrayList<>();
+    }
+
+    @Override
+    public void initBankService(BankService bankService) {
+        this.bankService = bankService;
+    }
+
+    @Override
+    public boolean addBankAtm(int id) {
+        BankOffice bankOffice = this.read(id);
+
+        if (bankOffice.getIsCanHasBankAtm()) {
+            bankOffice.setNumOfBankAtm(bankOffice.getNumOfBankAtm() + 1);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public BankOffice create(
+            String name,
+            String address,
+            String status,
+            int bank,
+            boolean canHasBankAtm,
+            boolean canAppleCredit,
+            boolean canGetMoney,
+            boolean canTakeMoney,
+            float totalMoney,
+            float bankOfficeRentCost
+    ) {
+        boolean isExistsBank = bankService.isExists(bank);
+
+        if (!isExistsBank) {
+            return null;
+        }
+
+        boolean reserveStatus = bankService.reserveMoney(bank, totalMoney);
+
+        if (!reserveStatus) {
+            return null;
+        }
+
+        int numOfBankAtm = 0;
+        BankOffice newEntity = new BankOffice(
+                name,
+                address,
+                status,
+                bank,
+                canHasBankAtm,
+                numOfBankAtm,
+                canAppleCredit,
+                canGetMoney,
+                canTakeMoney,
+                totalMoney,
+                bankOfficeRentCost,
+                0
+        );
+        newEntity.setId(entityList.size() + 1);
+
+        return newEntity;
+    }
+}

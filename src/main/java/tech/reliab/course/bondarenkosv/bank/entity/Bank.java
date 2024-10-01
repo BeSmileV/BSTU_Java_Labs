@@ -1,19 +1,17 @@
 package main.java.tech.reliab.course.bondarenkosv.bank.entity;
 
-import static main.java.tech.reliab.course.bondarenkosv.bank.utils.BankUtils.*;
-
-public class Bank extends BaseEntity {
+public class Bank extends BaseEntity<Bank> {
     private String name;
-    private int officeNum;
+    private int officesNum;
     private int bankAtmNum;
     private int employeesNum;
-    private int clientNum;
+    private int clientsNum;
     private float rating;
     private float totalMoney;
+    private float reservedMoney;
     private float percentageRate;
 
     public Bank(
-            int id,
             String name,
             int officeNum,
             int bankAtmNum,
@@ -21,17 +19,18 @@ public class Bank extends BaseEntity {
             int clientNum,
             float rating,
             float totalMoney,
+            float reservedMoney,
             float percentageRate
     ) {
-        this.id = id;
         this.name = name;
-        this.officeNum = 0;
-        this.bankAtmNum = 0;
-        this.employeesNum = 0;
-        this.clientNum = 0;
-        this.rating = generateBankRating();
-        this.totalMoney = generateBankTotalMoney();
-        this.percentageRate = generatePercentageRate(this.rating);
+        this.officesNum = officeNum;
+        this.bankAtmNum = bankAtmNum;
+        this.employeesNum = employeesNum;
+        this.clientsNum = clientNum;
+        this.rating = rating;
+        this.totalMoney = totalMoney;
+        this.reservedMoney = reservedMoney;
+        this.percentageRate = percentageRate;
     }
 
     // Getters
@@ -39,8 +38,8 @@ public class Bank extends BaseEntity {
         return name;
     }
 
-    public int getOfficeNum() {
-        return officeNum;
+    public int getOfficesNum() {
+        return officesNum;
     }
 
     public int getBankAtmNum() {
@@ -51,8 +50,8 @@ public class Bank extends BaseEntity {
         return employeesNum;
     }
 
-    public int getClientNum() {
-        return clientNum;
+    public int getClientsNum() {
+        return clientsNum;
     }
 
     public float getRating() {
@@ -61,6 +60,10 @@ public class Bank extends BaseEntity {
 
     public float getTotalMoney() {
         return totalMoney;
+    }
+
+    public float getReservedMoney() {
+        return reservedMoney;
     }
 
     public float getPercentageRate() {
@@ -72,8 +75,8 @@ public class Bank extends BaseEntity {
         this.name = name;
     }
 
-    public void setOfficeNum(int officeNum) {
-        this.officeNum = officeNum;
+    public void setOfficesNum(int officesNum) {
+        this.officesNum = officesNum;
     }
 
     public void setBankAtmNum(int bankAtmNum) {
@@ -84,8 +87,8 @@ public class Bank extends BaseEntity {
         this.employeesNum = employeesNum;
     }
 
-    public void setClientNum(int clientNum) {
-        this.clientNum = clientNum;
+    public void setClientsNum(int clientsNum) {
+        this.clientsNum = clientsNum;
     }
 
     public void setRating(float rating) {
@@ -96,6 +99,10 @@ public class Bank extends BaseEntity {
         this.totalMoney = totalMoney;
     }
 
+    public void setReservedMoney(float reservedMoney) {
+        this.reservedMoney = reservedMoney;
+    }
+
     public void setPercentageRate(float percentageRate) {
         this.percentageRate = percentageRate;
     }
@@ -103,17 +110,19 @@ public class Bank extends BaseEntity {
 
     @Override
     public Bank copy() {
-        return new Bank(
-                id,
+        Bank copy = new Bank(
                 name,
-                officeNum,
+                officesNum,
                 bankAtmNum,
                 employeesNum,
-                clientNum,
+                clientsNum,
                 rating,
                 totalMoney,
+                reservedMoney,
                 percentageRate
         );
+        copy.setId(id);
+        return copy;
     }
 
     @Override
@@ -121,12 +130,13 @@ public class Bank extends BaseEntity {
         return "Bank(" +
                 "id=" + id +
                 "; name=" + name +
-                "; officeNum=" + officeNum +
+                "; officeNum=" + officesNum +
                 "; bankAtmNum=" + bankAtmNum +
                 "; employeesNum=" + employeesNum +
-                "; clientNum=" + clientNum +
+                "; clientNum=" + clientsNum +
                 "; rating=" + rating +
                 "; totalMoney=" + totalMoney +
+                "; reservedMoney=" + reservedMoney +
                 "; percentageRate=" + percentageRate +
                 ")";
     }

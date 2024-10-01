@@ -1,17 +1,15 @@
 package main.java.tech.reliab.course.bondarenkosv.bank.entity;
 
-public class PaymentAccount extends BaseEntity {
+public class PaymentAccount extends BaseEntity<PaymentAccount> {
     private User user;
     private Bank bank;
     private float amount;
 
     public PaymentAccount(
-            int id,
             User user,
             Bank bank,
             float amount
     ) {
-        this.id = id;
         this.user = user;
         this.bank = bank;
         this.amount = amount;
@@ -46,12 +44,13 @@ public class PaymentAccount extends BaseEntity {
 
     @Override
     public PaymentAccount copy() {
-        return new PaymentAccount(
-                id,
+        PaymentAccount copy = new PaymentAccount(
                 user.copy(),
                 bank.copy(),
                 amount
         );
+        copy.setId(id);
+        return copy;
     }
 
     @Override
