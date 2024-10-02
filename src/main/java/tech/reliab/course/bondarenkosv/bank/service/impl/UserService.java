@@ -41,6 +41,7 @@ public class UserService extends BaseService<User> implements UserServiceInterfa
                 creditRating
         );
         newEntity.setId(entityList.size() + 1);
+        entityList.add(newEntity);
         return newEntity.copy();
     }
 }

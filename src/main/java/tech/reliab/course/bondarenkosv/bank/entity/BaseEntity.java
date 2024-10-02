@@ -2,7 +2,7 @@ package main.java.tech.reliab.course.bondarenkosv.bank.entity;
 
 public abstract class BaseEntity<T> {
     protected int id;
-    protected boolean active;
+    protected boolean active = true;
 
     public int getId() {
         return id;

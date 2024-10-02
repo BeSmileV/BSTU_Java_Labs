@@ -9,6 +9,10 @@ import java.util.List;
 public abstract class BaseService<T extends BaseEntity<T>> implements BaseServiceInterface<T> {
     protected List<T> entityList;
 
+    public void init() {
+        entityList = new ArrayList<T>();
+    }
+
     public T read(int id) {
         for (T entity : entityList) {
             if (entity.getId() == id) {

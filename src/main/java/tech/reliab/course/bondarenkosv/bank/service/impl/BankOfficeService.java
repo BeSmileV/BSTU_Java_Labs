@@ -8,10 +8,6 @@ import java.util.ArrayList;
 public class BankOfficeService extends BaseService<BankOffice> implements BankOfficeServiceInterface {
     private BankService bankService;
 
-    public BankOfficeService() {
-        entityList = new ArrayList<>();
-    }
-
     @Override
     public void initBankService(BankService bankService) {
         this.bankService = bankService;
@@ -86,6 +82,7 @@ public class BankOfficeService extends BaseService<BankOffice> implements BankOf
                 0
         );
         newEntity.setId(entityList.size() + 1);
+        entityList.add(newEntity);
         return newEntity.copy();
     }
 }

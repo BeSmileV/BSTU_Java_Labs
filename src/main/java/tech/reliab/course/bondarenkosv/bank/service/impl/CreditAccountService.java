@@ -51,13 +51,17 @@ public class CreditAccountService extends BaseService<CreditAccount> implements 
         }
 
         // Проверка возможности выдачи кредита работником
-        if (!employeeService.canApplyCredits(employee))
+        if (!employeeService.canApplyCredits(employee)) {
+            System.out.println("Apply credits failed");
             return null;
+        }
 
         // Попытка взять кредит
         boolean reserveMoneyResponse = bankService.getCredit(bank, creditSum, percentageRate);
-        if (!reserveMoneyResponse)
+        if (!reserveMoneyResponse) {
+            System.out.println("Reserve credit failed");
             return null;
+        }
 
         CreditAccount newEntity = new CreditAccount(
                 user,
@@ -71,6 +75,7 @@ public class CreditAccountService extends BaseService<CreditAccount> implements 
                 percentageRate
         );
         newEntity.setId(entityList.size() + 1);
+        entityList.add(newEntity);
         return newEntity;
     }
 }

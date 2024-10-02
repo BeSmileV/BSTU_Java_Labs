@@ -53,7 +53,7 @@ public class BankAtmService extends BaseService<BankAtm> implements BankAtmServi
         boolean bankOfficeReservedMoney = bankOfficeService.reserveMoney(bankOffice, totalMoney);
         if (!bankOfficeCanGetMoney && canGetMoney ||
                 !bankOfficeCanTakeMoney && canTakeMoney ||
-                bankOfficeReservedMoney) {
+                !bankOfficeReservedMoney) {
             return null;
         }
 
@@ -71,6 +71,7 @@ public class BankAtmService extends BaseService<BankAtm> implements BankAtmServi
                 0
         );
         newEntity.setId(entityList.size() + 1);
+        entityList.add(newEntity);
         return newEntity.copy();
     }
 }

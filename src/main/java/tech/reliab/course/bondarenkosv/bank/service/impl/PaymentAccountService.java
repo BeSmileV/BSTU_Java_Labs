@@ -18,14 +18,14 @@ public class PaymentAccountService extends BaseService<PaymentAccount> implement
     }
 
     @Override
-    public PaymentAccount getPaymentAccountByAccountNumber(
+    public PaymentAccount create(
             int user,
             int bank
     ) {
-        boolean isExsieBank = bankService.isExists(bank);
+        boolean isExistBank = bankService.isExists(bank);
         boolean isExistUser = userService.isExists(user);
 
-        if (!isExsieBank || !isExistUser) {
+        if (!isExistBank || !isExistUser) {
             return null;
         }
 
@@ -35,6 +35,7 @@ public class PaymentAccountService extends BaseService<PaymentAccount> implement
                 0
         );
         newEntity.setId(entityList.size() + 1);
+        entityList.add(newEntity);
         return newEntity;
     }
 }

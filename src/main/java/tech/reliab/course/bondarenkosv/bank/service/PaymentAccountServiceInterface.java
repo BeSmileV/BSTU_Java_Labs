@@ -9,7 +9,7 @@ public interface PaymentAccountServiceInterface extends BaseServiceInterface<Pay
 
     void initUserService(UserService userService);
 
-    PaymentAccount getPaymentAccountByAccountNumber(
+    PaymentAccount create(
             int user,
             int bank
     );

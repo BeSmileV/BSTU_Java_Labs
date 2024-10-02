@@ -59,6 +59,7 @@ public class EmployeeService extends BaseService<Employee> implements EmployeeSe
                 salary
         );
         newEntity.setId(entityList.size() + 1);
+        entityList.add(newEntity);
         return newEntity.copy();
     }
 }

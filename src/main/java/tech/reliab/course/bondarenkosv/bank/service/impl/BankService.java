@@ -8,14 +8,10 @@ import java.util.ArrayList;
 import static main.java.tech.reliab.course.bondarenkosv.bank.utils.BankUtils.*;
 
 public class BankService extends BaseService<Bank> implements BankServiceInterface<Bank> {
-    public BankService() {
-        this.entityList = new ArrayList<>();
-    }
-
     @Override
     public boolean getCredit(int id, float money, float percentageRate) {
         Bank bank = read(id);
-        if (bank.getPercentageRate() > percentageRate) {
+        if (bank.getPercentageRate() < percentageRate) {
             return false;
         }
         return reserveMoney(id, money);
@@ -43,7 +39,8 @@ public class BankService extends BaseService<Bank> implements BankServiceInterfa
                 reservedMoney,
                 percentageRate
         );
-        newEntity.setId(this.entityList.size() + 1);
+        newEntity.setId(entityList.size() + 1);
+        entityList.add(newEntity);
         return newEntity.copy();
     }
 
