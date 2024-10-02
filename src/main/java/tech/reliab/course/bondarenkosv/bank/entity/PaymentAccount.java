@@ -1,13 +1,13 @@
 package main.java.tech.reliab.course.bondarenkosv.bank.entity;
 
 public class PaymentAccount extends BaseEntity<PaymentAccount> {
-    private User user;
-    private Bank bank;
+    private int user;
+    private int bank;
     private float amount;
 
     public PaymentAccount(
-            User user,
-            Bank bank,
+            int user,
+            int bank,
             float amount
     ) {
         this.user = user;
@@ -16,11 +16,11 @@ public class PaymentAccount extends BaseEntity<PaymentAccount> {
     }
 
     // Getters
-    public User getUser() {
+    public int getUser() {
         return user;
     }
 
-    public Bank getBank() {
+    public int getBank() {
         return bank;
     }
 
@@ -29,11 +29,11 @@ public class PaymentAccount extends BaseEntity<PaymentAccount> {
     }
 
     // Setters
-    public void setUser(User user) {
+    public void setUser(int user) {
         this.user = user;
     }
 
-    public void setBank(Bank bank) {
+    public void setBank(int bank) {
         this.bank = bank;
     }
 
@@ -45,8 +45,8 @@ public class PaymentAccount extends BaseEntity<PaymentAccount> {
     @Override
     public PaymentAccount copy() {
         PaymentAccount copy = new PaymentAccount(
-                user.copy(),
-                bank.copy(),
+                user,
+                bank,
                 amount
         );
         copy.setId(id);
@@ -57,8 +57,8 @@ public class PaymentAccount extends BaseEntity<PaymentAccount> {
     public String toString() {
         return "PaymentAccount(" +
                 "id=" + id +
-                ", user=" + user.toString() +
-                ", bank=" + bank.toString() +
+                ", user=" + user +
+                ", bank=" + bank +
                 ", amount=" + amount +
                 ")";
     }

@@ -2,8 +2,6 @@ package main.java.tech.reliab.course.bondarenkosv.bank.entity;
 
 import java.util.Arrays;
 
-import static main.java.tech.reliab.course.bondarenkosv.bank.utils.UserUtils.generateUserCreditRating;
-
 public class User extends BaseEntity<User> {
     private String fio;
     private String dateOfBirth;
@@ -17,14 +15,15 @@ public class User extends BaseEntity<User> {
             String dateOfBirth,
             String workAddress,
             int[] banks,
-            float monthlyIncome
+            float monthlyIncome,
+            float creditRating
     ) {
         this.fio = fio;
         this.dateOfBirth = dateOfBirth;
         this.workAddress = workAddress;
         this.banks = banks;
         this.monthlyIncome = monthlyIncome;
-        this.creditRating = generateUserCreditRating(this.monthlyIncome);
+        this.creditRating = creditRating;
     }
 
     // Getters
@@ -85,7 +84,8 @@ public class User extends BaseEntity<User> {
                 dateOfBirth,
                 workAddress,
                 banks.clone(),
-                monthlyIncome
+                monthlyIncome,
+                creditRating
         );
         copy.setId(id);
         return copy;

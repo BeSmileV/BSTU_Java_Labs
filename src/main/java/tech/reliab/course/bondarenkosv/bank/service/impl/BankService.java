@@ -13,6 +13,15 @@ public class BankService extends BaseService<Bank> implements BankServiceInterfa
     }
 
     @Override
+    public boolean getCredit(int id, float money, float percentageRate) {
+        Bank bank = read(id);
+        if (bank.getPercentageRate() > percentageRate) {
+            return false;
+        }
+        return reserveMoney(id, money);
+    }
+
+    @Override
     public Bank create(String name) {
         int officeNum = 0;
         int bankAtmNum = 0;

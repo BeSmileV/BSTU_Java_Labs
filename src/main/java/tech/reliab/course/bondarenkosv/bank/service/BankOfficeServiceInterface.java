@@ -20,4 +20,6 @@ public interface BankOfficeServiceInterface extends BaseServiceInterface<BankOff
     );
 
     boolean addBankAtm(int id);
+
+    boolean reserveMoney(int id, float money);
 }

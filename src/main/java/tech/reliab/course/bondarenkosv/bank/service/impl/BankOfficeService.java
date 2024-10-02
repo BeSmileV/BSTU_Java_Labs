@@ -30,6 +30,21 @@ public class BankOfficeService extends BaseService<BankOffice> implements BankOf
     }
 
     @Override
+    public boolean reserveMoney(int id, float money) {
+        BankOffice bankOffice = this.read(id);
+
+        float totalMoney = bankOffice.getTotalMoney();
+        float reservedMoney = bankOffice.getReservedMoney();
+        if (bankOffice == null || (totalMoney - reservedMoney < money)) {
+            return false;
+        }
+
+        bankOffice.setReservedMoney(reservedMoney + money);
+        this.update(id, bankOffice);
+        return true;
+    }
+
+    @Override
     public BankOffice create(
             String name,
             String address,
@@ -44,12 +59,13 @@ public class BankOfficeService extends BaseService<BankOffice> implements BankOf
     ) {
         boolean isExistsBank = bankService.isExists(bank);
 
+        // Проверка наличия банка
         if (!isExistsBank) {
             return null;
         }
 
+        // Резервирование денег в банке
         boolean reserveStatus = bankService.reserveMoney(bank, totalMoney);
-
         if (!reserveStatus) {
             return null;
         }
@@ -70,7 +86,6 @@ public class BankOfficeService extends BaseService<BankOffice> implements BankOf
                 0
         );
         newEntity.setId(entityList.size() + 1);
-
-        return newEntity;
+        return newEntity.copy();
     }
 }

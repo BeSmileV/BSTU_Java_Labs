@@ -37,23 +37,23 @@ public class BankAtmService extends BaseService<BankAtm> implements BankAtmServi
             float totalMoney,
             float serviceCost
     ) {
+
+        // Проверка наличия банка, офиса и работника
         boolean isExistsBankEntity = bankService.isExists(bank);
         boolean isExistsBankOfficeEntity = bankOfficeService.isExists(bankOffice);
         boolean isExistsEmployeeEntity = employeeService.isExists(employee);
-
         if (!isExistsBankEntity || !isExistsBankOfficeEntity || !isExistsEmployeeEntity) {
             return null;
         }
 
+        // Проверка возможности выдачи и взятия денег и попытка зарезервировать деньги
         BankOffice bankOfficeEntity = bankOfficeService.read(bankOffice);
         boolean bankOfficeCanTakeMoney = bankOfficeEntity.getCanTakeMoney();
         boolean bankOfficeCanGetMoney = bankOfficeEntity.getCanGetMoney();
-        float bankOfficeTotalMoney = bankOfficeEntity.getTotalMoney();
-        float bankOfficeReservedMoney = bankOfficeEntity.getReservedMoney();
-
+        boolean bankOfficeReservedMoney = bankOfficeService.reserveMoney(bankOffice, totalMoney);
         if (!bankOfficeCanGetMoney && canGetMoney ||
                 !bankOfficeCanTakeMoney && canTakeMoney ||
-                totalMoney + bankOfficeReservedMoney > bankOfficeTotalMoney) {
+                bankOfficeReservedMoney) {
             return null;
         }
 
@@ -71,7 +71,6 @@ public class BankAtmService extends BaseService<BankAtm> implements BankAtmServi
                 0
         );
         newEntity.setId(entityList.size() + 1);
-
-        return newEntity;
+        return newEntity.copy();
     }
 }

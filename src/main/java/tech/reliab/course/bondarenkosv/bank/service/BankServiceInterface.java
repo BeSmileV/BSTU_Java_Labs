@@ -12,4 +12,6 @@ public interface BankServiceInterface<T> extends BaseServiceInterface<T> {
     void addClient(int id);
 
     boolean reserveMoney(int id, float money);
+
+    boolean getCredit(int id, float money, float percentageRate);
 }

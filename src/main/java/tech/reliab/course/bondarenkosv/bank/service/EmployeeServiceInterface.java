@@ -9,6 +9,8 @@ public interface EmployeeServiceInterface extends BaseServiceInterface<Employee>
 
     void initBankOfficeService(BankOfficeService bankOfficeService);
 
+    boolean canApplyCredits(int id);
+
     Employee create(
             String fio,
             String dateOfBirth,

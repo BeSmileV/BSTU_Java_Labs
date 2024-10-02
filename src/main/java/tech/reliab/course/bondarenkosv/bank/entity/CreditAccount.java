@@ -1,47 +1,44 @@
 package main.java.tech.reliab.course.bondarenkosv.bank.entity;
 
 public class CreditAccount extends BaseEntity<CreditAccount> {
-    private User user;
-    private Bank bank;
+    private int user;
+    private int bank;
+    private int employee;
+    private int paymentAccount;
     private String creditStart;
     private String creditEnd;
-    private int mouthsNum;
     private float creditSum;
     private float monthlyPayment;
     private float percentageRate;
-    private Employee employee;
-    private PaymentAccount paymentAccount;
 
     public CreditAccount(
-            User user,
-            Bank bank,
+            int user,
+            int bank,
+            int employee,
+            int paymentAccount,
             String creditStart,
             String creditEnd,
-            int mouthsNum,
             float creditSum,
             float monthlyPayment,
-            float percentageRate,
-            Employee employeeId,
-            PaymentAccount paymentAccountId
+            float percentageRate
     ) {
         this.user = user;
         this.bank = bank;
+        this.employee = employee;
+        this.paymentAccount = paymentAccount;
         this.creditStart = creditStart;
         this.creditEnd = creditEnd;
-        this.mouthsNum = mouthsNum;
         this.creditSum = creditSum;
         this.monthlyPayment = monthlyPayment;
         this.percentageRate = percentageRate;
-        this.employee = employeeId;
-        this.paymentAccount = paymentAccountId;
     }
 
     // Getters
-    public User getUser() {
+    public int getUser() {
         return user;
     }
 
-    public Bank getBank() {
+    public int getBank() {
         return bank;
     }
 
@@ -51,10 +48,6 @@ public class CreditAccount extends BaseEntity<CreditAccount> {
 
     public String getCreditEnd() {
         return creditEnd;
-    }
-
-    public int getMouthsNum() {
-        return mouthsNum;
     }
 
     public float getCreditSum() {
@@ -69,20 +62,20 @@ public class CreditAccount extends BaseEntity<CreditAccount> {
         return percentageRate;
     }
 
-    public Employee getEmployee() {
+    public int getEmployee() {
         return employee;
     }
 
-    public PaymentAccount getPaymentAccount() {
+    public int getPaymentAccount() {
         return paymentAccount;
     }
 
     // Setters
-    public void setUser(User user) {
+    public void setUser(int user) {
         this.user = user;
     }
 
-    public void setBank(Bank bank) {
+    public void setBank(int bank) {
         this.bank = bank;
     }
 
@@ -94,9 +87,6 @@ public class CreditAccount extends BaseEntity<CreditAccount> {
         this.creditEnd = creditEnd;
     }
 
-    public void setMouthsNum(int mouthsNum) {
-        this.mouthsNum = mouthsNum;
-    }
 
     public void setCreditSum(float creditSum) {
         this.creditSum = creditSum;
@@ -110,11 +100,11 @@ public class CreditAccount extends BaseEntity<CreditAccount> {
         this.percentageRate = percentageRate;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(int employee) {
         this.employee = employee;
     }
 
-    public void setPaymentAccount(PaymentAccount paymentAccount) {
+    public void setPaymentAccount(int paymentAccount) {
         this.paymentAccount = paymentAccount;
     }
 
@@ -124,14 +114,13 @@ public class CreditAccount extends BaseEntity<CreditAccount> {
         CreditAccount copy = new CreditAccount(
                 user,
                 bank,
+                employee,
+                paymentAccount,
                 creditStart,
                 creditEnd,
-                mouthsNum,
                 creditSum,
                 monthlyPayment,
-                percentageRate,
-                employee.copy(),
-                paymentAccount.copy()
+                percentageRate
         );
         copy.setId(id);
         return copy;
@@ -141,16 +130,15 @@ public class CreditAccount extends BaseEntity<CreditAccount> {
     public String toString() {
         return "CreditAccount(" +
                 "id=" + id +
-                ", user=" + user.toString() +
-                ", bank=" + bank.toString() +
+                ", user=" + user +
+                ", bank=" + bank +
+                ", employeeId=" + employee +
+                ", paymentAccount=" + paymentAccount +
                 ", creditStart=" + creditStart +
                 ", creditEnd=" + creditEnd +
-                ", mouthsNum=" + mouthsNum +
                 ", creditSum=" + creditSum +
                 ", monthlyPayment=" + monthlyPayment +
                 ", percentageRate=" + percentageRate +
-                ", employeeId=" + employee +
-                ", paymentAccount=" + paymentAccount.toString() +
                 ")";
     }
 }

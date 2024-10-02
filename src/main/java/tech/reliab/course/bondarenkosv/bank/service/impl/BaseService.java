@@ -12,6 +12,8 @@ public abstract class BaseService<T extends BaseEntity<T>> implements BaseServic
     public T read(int id) {
         for (T entity : entityList) {
             if (entity.getId() == id) {
+                if (!entity.isActive())
+                    return null;
                 return entity.copy();
             }
         }
@@ -31,14 +33,17 @@ public abstract class BaseService<T extends BaseEntity<T>> implements BaseServic
     }
 
     public void delete(int id) {
-        entityList.removeIf(entity -> entity.getId() == id);
+        T entity = read(id);
+        entity.setActive(false);
+        update(id, entity);
     }
 
     public List<T> list() {
         List<T> list = new ArrayList<T>();
 
         for (T entity : entityList) {
-            list.add(entity.copy());
+            if (entity.isActive())
+                list.add(entity.copy());
         }
 
         return list;
@@ -47,7 +52,7 @@ public abstract class BaseService<T extends BaseEntity<T>> implements BaseServic
     @Override
     public boolean isExists(int id) {
         for (T entity : entityList) {
-            if (entity.getId() == id) {
+            if (entity.getId() == id && entity.isActive()) {
                 return true;
             }
         }
