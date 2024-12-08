@@ -7,10 +7,6 @@ import static tech.reliab.course.bondarenkosv.bank.utils.BankUtils.*;
 public class BankService extends BaseService<Bank> implements BankServiceInterface<Bank> {
     @Override
     public boolean getCredit(int id, float money, float percentageRate) {
-        Bank bank = read(id);
-        if (bank.getPercentageRate() < percentageRate) {
-            return false;
-        }
         return reserveMoney(id, money);
     }
 

@@ -21,7 +21,6 @@ public class UserService extends BaseService<User> implements UserServiceInterfa
             int[] banks,
             float monthlyIncome
     ) {
-
         for (int bank : banks) {
             if (!bankService.isExists(bank))
                 return null;

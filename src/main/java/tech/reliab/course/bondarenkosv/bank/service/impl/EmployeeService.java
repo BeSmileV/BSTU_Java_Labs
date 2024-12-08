@@ -47,6 +47,7 @@ public class EmployeeService extends BaseService<Employee> implements EmployeeSe
         if (!canBankOfficeAppleCredit && canApplyCredits) {
             return null;
         }
+
         bankService.addEmployee(bank);
         Employee newEntity = new Employee(
                 fio,

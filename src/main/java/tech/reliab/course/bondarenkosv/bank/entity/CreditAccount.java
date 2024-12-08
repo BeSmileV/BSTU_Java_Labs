@@ -16,7 +16,6 @@ public class CreditAccount extends BaseEntity<CreditAccount> {
     private String creditEnd;
     private float creditSum;
     private float monthlyPayment;
-    private float percentageRate;
 
     public CreditAccount(
             int user,
@@ -26,8 +25,7 @@ public class CreditAccount extends BaseEntity<CreditAccount> {
             String creditStart,
             String creditEnd,
             float creditSum,
-            float monthlyPayment,
-            float percentageRate
+            float monthlyPayment
     ) {
         this.user = user;
         this.bank = bank;
@@ -37,7 +35,6 @@ public class CreditAccount extends BaseEntity<CreditAccount> {
         this.creditEnd = creditEnd;
         this.creditSum = creditSum;
         this.monthlyPayment = monthlyPayment;
-        this.percentageRate = percentageRate;
     }
 
     @Override
@@ -50,8 +47,7 @@ public class CreditAccount extends BaseEntity<CreditAccount> {
                 creditStart,
                 creditEnd,
                 creditSum,
-                monthlyPayment,
-                percentageRate
+                monthlyPayment
         );
         copy.setId(id);
         return copy;

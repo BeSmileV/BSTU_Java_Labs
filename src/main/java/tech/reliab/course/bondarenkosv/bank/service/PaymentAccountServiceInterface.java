@@ -5,9 +5,11 @@ import tech.reliab.course.bondarenkosv.bank.service.impl.BankService;
 import tech.reliab.course.bondarenkosv.bank.service.impl.UserService;
 
 public interface PaymentAccountServiceInterface extends BaseServiceInterface<PaymentAccount> {
-    void initBankSerive(BankService bankService);
+    void initBankService(BankService bankService);
 
     void initUserService(UserService userService);
+
+    void setAmount(int id, float amount);
 
     PaymentAccount create(
             int user,

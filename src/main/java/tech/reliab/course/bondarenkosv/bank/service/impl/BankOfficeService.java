@@ -64,6 +64,7 @@ public class BankOfficeService extends BaseService<BankOffice> implements BankOf
             return null;
         }
 
+        bankService.addOffice(bank);
         int numOfBankAtm = 0;
         BankOffice newEntity = new BankOffice(
                 name,

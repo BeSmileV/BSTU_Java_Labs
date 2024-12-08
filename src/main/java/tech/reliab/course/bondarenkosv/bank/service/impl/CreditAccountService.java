@@ -38,8 +38,7 @@ public class CreditAccountService extends BaseService<CreditAccount> implements 
             String creditStart,
             String creditEnd,
             float creditSum,
-            float monthlyPayment,
-            float percentageRate
+            float monthlyPayment
     ) {
         // Проверка наличия сущностей
         boolean isExistsUser = userService.isExists(user);
@@ -57,12 +56,13 @@ public class CreditAccountService extends BaseService<CreditAccount> implements 
         }
 
         // Попытка взять кредит
-        boolean reserveMoneyResponse = bankService.getCredit(bank, creditSum, percentageRate);
+        boolean reserveMoneyResponse = bankService.getCredit(bank, creditSum, paymentAccountService.list().get(paymentAccount).getPercentageRate());
         if (!reserveMoneyResponse) {
             System.out.println("Reserve credit failed");
             return null;
         }
 
+        paymentAccountService.setAmount(paymentAccount, creditSum);
         CreditAccount newEntity = new CreditAccount(
                 user,
                 bank,
@@ -71,8 +71,7 @@ public class CreditAccountService extends BaseService<CreditAccount> implements 
                 creditStart,
                 creditEnd,
                 creditSum,
-                monthlyPayment,
-                percentageRate
+                monthlyPayment
         );
         newEntity.setId(entityList.size() + 1);
         entityList.add(newEntity);

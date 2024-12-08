@@ -56,7 +56,8 @@ public class BankAtmService extends BaseService<BankAtm> implements BankAtmServi
                 !bankOfficeReservedMoney) {
             return null;
         }
-
+        bankService.addAtm(bank);
+        bankOfficeService.addBankAtm(bankOffice);
         BankAtm newEntity = new BankAtm(
                 name,
                 address,

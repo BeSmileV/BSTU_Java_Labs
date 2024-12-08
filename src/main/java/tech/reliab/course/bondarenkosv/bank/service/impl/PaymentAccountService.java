@@ -8,13 +8,20 @@ public class PaymentAccountService extends BaseService<PaymentAccount> implement
     UserService userService;
 
     @Override
-    public void initBankSerive(BankService bankService) {
+    public void initBankService(BankService bankService) {
         this.bankService = bankService;
     }
 
     @Override
     public void initUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Override
+    public void setAmount(int id, float amount) {
+        PaymentAccount paymentAccount = this.read(id);
+        paymentAccount.setAmount(amount);
+        this.update(id, paymentAccount);
     }
 
     @Override
@@ -32,7 +39,8 @@ public class PaymentAccountService extends BaseService<PaymentAccount> implement
         PaymentAccount newEntity = new PaymentAccount(
                 user,
                 bank,
-                0
+                0,
+                10000
         );
         newEntity.setId(entityList.size() + 1);
         entityList.add(newEntity);

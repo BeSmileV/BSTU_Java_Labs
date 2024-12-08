@@ -11,15 +11,18 @@ public class PaymentAccount extends BaseEntity<PaymentAccount> {
     private int user;
     private int bank;
     private float amount;
+    private float percentageRate;
 
     public PaymentAccount(
             int user,
             int bank,
-            float amount
+            float amount,
+            float percentageRate
     ) {
         this.user = user;
         this.bank = bank;
         this.amount = amount;
+        this.percentageRate = percentageRate;
     }
 
     @Override
@@ -27,7 +30,8 @@ public class PaymentAccount extends BaseEntity<PaymentAccount> {
         PaymentAccount copy = new PaymentAccount(
                 user,
                 bank,
-                amount
+                amount,
+                percentageRate
         );
         copy.setId(id);
         return copy;

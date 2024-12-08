@@ -23,7 +23,6 @@ public interface CreditAccountServiceInterface extends BaseServiceInterface<Cred
             String creditStart,
             String creditEnd,
             float creditSum,
-            float monthlyPayment,
-            float percentageRate
+            float monthlyPayment
     );
 }
