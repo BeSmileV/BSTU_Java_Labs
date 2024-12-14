@@ -12,11 +12,9 @@ public class Main {
             UserService userService,
             PaymentAccountService paymentAccountService
     ) {
-        // Создаём 5 банков
         for (int i = 1; i <= 5; i++) {
             Bank bank = bankService.create("Bank " + i);
 
-            // Создаём 5 офисов для каждого банка
             for (int j = 1; j <= 2; j++) {
                 BankOffice bankOffice = bankOfficeService.create(
                         "Office " + j + " of Bank " + i,
@@ -31,7 +29,6 @@ public class Main {
                         1000 + j * 50
                 );
 
-                // Создаём 5 сотрудников для каждого офиса
                 for (int k = 1; k <= 2; k++) {
                     Employee employee = employeeService.create(
                             "Employee " + k + " of Office " + j + " of Bank " + i,
@@ -44,7 +41,6 @@ public class Main {
                             1000 + k * 100
                     );
 
-                    // Создаём 5 банкоматов для каждого офиса
                     for (int l = 1; l <= 2; l++) {
                         bankAtmService.create(
                                 "ATM " + l + " of Office " + j + " of Bank " + i,
@@ -62,7 +58,6 @@ public class Main {
                 }
             }
 
-            // Создаём 5 пользователей для каждого банка
             for (int m = 1; m <= 5; m++) {
                 User user = userService.create(
                         "User " + m + " of Bank " + i,
@@ -72,44 +67,12 @@ public class Main {
                         1000 + m * 100
                 );
 
-                // Создаём 1 счёт для каждого пользователя
-                PaymentAccount paymentAccount = paymentAccountService.create(
+                paymentAccountService.create(
                         user.getId(),
                         bank.getId()
                 );
             }
         }
-    }
-
-    public static void printAllData(
-            BankService bankService,
-            BankOfficeService bankOfficeService,
-            EmployeeService employeeService,
-            BankAtmService bankAtmService,
-            UserService userService,
-            PaymentAccountService paymentAccountService,
-            CreditAccountService creditAccountService
-    ) {
-        System.out.println("Banks:");
-        bankService.list().forEach(System.out::println);
-
-        System.out.println("Bank Offices:");
-        bankOfficeService.list().forEach(System.out::println);
-
-        System.out.println("Employees:");
-        employeeService.list().forEach(System.out::println);
-
-        System.out.println("ATMs:");
-        bankAtmService.list().forEach(System.out::println);
-
-        System.out.println("Users:");
-        userService.list().forEach(System.out::println);
-
-        System.out.println("Payment Accounts:");
-        paymentAccountService.list().forEach(System.out::println);
-
-        System.out.println("Credit Accounts:");
-        creditAccountService.list().forEach(System.out::println);
     }
 
     public static int selectBank(BankService bankService, float amount) {
@@ -193,9 +156,7 @@ public class Main {
         return -1;
     }
 
-    public static int selectAtm(BankService bankService, BankOfficeService bankOfficeService, BankAtmService bankAtmService, int bank, int bankOffice, float amount) {
-        List<BankOffice> bankOffices = bankOfficeService.list();
-        List<Bank> banks = bankService.list();
+    public static int selectAtm(BankAtmService bankAtmService, int bank, int bankOffice, float amount) {
         List<BankAtm> bankAtms = bankAtmService.list();
 
         for (BankAtm curBankAtm : bankAtms) {
@@ -304,8 +265,8 @@ public class Main {
         );
         System.out.println(creditAccount.toString());
 
-        int selectAtm = selectAtm(bankService, bankOfficeService, bankAtmService, selectedBank, selectOffice, amount);
-        if(selectAtm == -1) {
+        int selectAtm = selectAtm(bankAtmService, selectedBank, selectOffice, amount);
+        if (selectAtm == -1) {
             System.out.println("Пока нет доступных банкоматов с нужным количеством денег, обратитесь в банк");
         } else {
             System.out.println(bankAtmService.read(selectAtm).toString());
